@@ -1,5 +1,5 @@
 {
-  "name": "my-next-app",
+  "name": "hall-of-legends",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,8 +8,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "@rebass/preset": "^4.0.5",
+    "@theme-ui/presets": "^0.3.0",
+    "axios": "^0.19.2",
+    "mongoose": "^5.9.20",
     "next": "9.4.4",
+    "next-connect": "^0.7.2",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "rebass": "^4.0.7",
+    "theme-ui": "^0.3.1"
   }
 }
