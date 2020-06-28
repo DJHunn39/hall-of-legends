@@ -40,7 +40,7 @@ const LegendGeneral = ({ general, club, cards }) => {
             fontSize={[1, 2, 3]}
             fontWeight="bold"
           >
-            {cards} Cards
+            {cards} {card > 1 ? 'cards' : 'card'}
           </Text>
           <Text
             display="inline"

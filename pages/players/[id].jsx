@@ -11,7 +11,7 @@ const HallOfLegends = ({ legends }) => {
   const legend =
     parsedLegends.filter((legend) => legend._id === id)[0] || legends[0];
 
-  const realPicUrl = `/playerPics${legend.general.pictureUrl.slice(8)}`;
+  const realPicUrl = legend.general.pictureUrl;
 
   return (
     <>
@@ -22,7 +22,6 @@ const HallOfLegends = ({ legends }) => {
             sx={{
               objectFit: 'cover',
               height: '500px',
-              // boxShadow: 'inset 0 0 30px rgba(44, 42, 42, 0.6)',
               animationName: (theme) => theme.animations.fadeIn[0],
               animationTimingFunction: 'ease-in',
               animationDuration: '500ms',
