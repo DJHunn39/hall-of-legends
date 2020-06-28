@@ -2,7 +2,7 @@ import { Flex, Text, Image } from 'rebass';
 
 const Stat = ({ stat, value, image, card = '' }) => (
   <Flex flexDirection="column" width={[1, 1, 1, 1]} textAlign="center">
-    {image && <Image src={`/${image}Icon.png`} width={40} />}
+    {image && <Image src={`/${image}Icon.png`} width={[20, 40]} />}
     <Text fontSize={[3, 4, 5]} fontWeight="bold">
       {value}
     </Text>

@@ -15,20 +15,20 @@ const HallOfLegends = ({ legends }) => {
 
   return (
     <>
-      <Flex flexDirection="row" width={[1, 1, 1, 1]}>
-        <Box p={3} width={[1 / 3, 1 / 3, 1 / 2]}>
+      <Flex flexDirection={['column', 'row']} width={[1, 1, 1, 1]}>
+        <Box p={3} width={[1, 1 / 3, 1 / 2]}>
           <Image
             src={realPicUrl}
             sx={{
               objectFit: 'cover',
-              height: '500px',
+              height: ['250px', '500px'],
               animationName: (theme) => theme.animations.fadeIn[0],
               animationTimingFunction: 'ease-in',
               animationDuration: '500ms',
             }}
           />
         </Box>
-        <Box p={3} width={[2 / 3, 2 / 3, 1 / 2]}>
+        <Box p={[1, 3]} width={[1, 2 / 3, 1 / 2]}>
           <LegendInfo legend={legend} />
         </Box>
       </Flex>
