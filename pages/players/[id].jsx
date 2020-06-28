@@ -11,7 +11,7 @@ const HallOfLegends = ({ legends }) => {
   const legend =
     parsedLegends.filter((legend) => legend._id === id)[0] || legends[0];
 
-  const realPicUrl = legend.general.pictureUrl.slice(8);
+  const realPicUrl = `/playerPics${legend.general.pictureUrl.slice(8)}`;
 
   return (
     <>

@@ -2,8 +2,8 @@
 import getAllLegends from '../database/getAllLegends';
 import { jsx } from 'theme-ui';
 import Head from 'next/head';
-import NextLink from 'next/link';
-import { Flex, Box, Heading, Link } from 'rebass';
+import { Flex, Box, Heading, Text } from 'rebass';
+import LegendListEntry from '../components/LegendListEntry/LegendListEntry';
 
 const Home = ({ legends }) => {
   const parsedLegends = JSON.parse(legends);
@@ -13,32 +13,40 @@ const Home = ({ legends }) => {
         <title>Home - The Hall of Legends</title>
       </Head>
       <main>
+        <Box flexGrow={2} p={3} width={1}>
+          <Heading fontSize={[5, 6, 7]}>The Hall of Legends</Heading>
+        </Box>
+
         <Flex flexDirection="column" width={[1, 1, 1, 1]}>
-          <Box flexGrow={2} p={3} width={1}>
-            <Heading fontSize={[5, 6, 7]}>The Hall of Legends</Heading>
-          </Box>
-          <Box p={3} width={1}>
+          <Flex
+            my={3}
+            flexDirection="row"
+            alignItems="center"
+            justifyContent="flex-start"
+            width={[1, 1, 1, 1]}
+          >
+            <Text mx={3} width={1 / 3} fontSize={[1, 2, 3]} fontWeight="bold">
+              Name
+            </Text>
+            <Text fontSize={[1, 2, 3]} mx={3} width={1 / 8}>
+              Position
+            </Text>
+            <Text fontSize={[1, 2, 3]} mx={3} width={1 / 4}>
+              Nation
+            </Text>
+          </Flex>
+          <ul>
             {parsedLegends.map((legend) => (
-              <NextLink
+              <li
                 key={legend._id}
-                href="/players/[id]"
-                as={`/players/${legend._id}`}
-                passHref
+                sx={{
+                  listStyle: 'none',
+                }}
               >
-                <Link
-                  mx={3}
-                  fontSize={[1, 2, 3]}
-                  fontWeight="bold"
-                  variant="nav"
-                  sx={{
-                    transition: 'all 0.1s linear',
-                  }}
-                >
-                  {legend.general.fullName}
-                </Link>
-              </NextLink>
+                <LegendListEntry legend={legend} />
+              </li>
             ))}
-          </Box>
+          </ul>
         </Flex>
       </main>
 

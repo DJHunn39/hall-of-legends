@@ -16,7 +16,7 @@ const LegendInfo = ({ legend }) => (
     <LegendGeneral
       general={legend.general}
       club={legend.club}
-      cards={legend.seasons.length}
+      cards={legend.seasons.filter((season) => season.year).length}
     />
     <LegendStats seasons={legend.seasons} />
   </Flex>
