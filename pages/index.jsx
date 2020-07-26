@@ -4,7 +4,7 @@ import { useState } from 'react';
 import SearchInput, { createFilter } from 'react-search-input';
 import { jsx } from 'theme-ui';
 import Head from 'next/head';
-import { Flex, Box, Heading, Text } from 'rebass';
+import { Flex, Box, Image, Text } from 'rebass';
 import LegendListEntry from '../components/LegendListEntry/LegendListEntry';
 
 const KEYS_TO_FILTER = ['general.fullName'];
@@ -29,7 +29,20 @@ const Home = ({ legends }) => {
       </Head>
       <main>
         <Box flexGrow={2} p={3} width={1}>
-          <Heading fontSize={[5, 6, 7]}>The Hall of Legends</Heading>
+          <h1>
+            <Image
+              src="/HallOfLegendsLogoAlt.png"
+              alt="The Hall of Legends"
+              sx={
+                {
+                  // objectFit: 'cover',
+                  // animationName: (theme) => theme.animations.fadeIn[0],
+                  // animationTimingFunction: 'ease-in',
+                  // animationDuration: '500ms',
+                }
+              }
+            />
+          </h1>
         </Box>
         <Flex flexDirection="column" width={[1, 1, 1, 1]}>
           <SearchInput

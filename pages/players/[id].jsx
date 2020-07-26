@@ -1,6 +1,7 @@
 import getAllLegends from '../../database/getAllLegends';
 import getAllIds from '../../database/getAllIds';
 import { Flex, Box, Image, Text } from 'rebass';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import LegendInfo from '../../components/LegendInfo/LegendInfo';
 
@@ -14,44 +15,52 @@ const HallOfLegends = ({ legends }) => {
   const realPicUrl = legend.general.pictureUrl;
 
   return (
-    <Flex
-      flexDirection="column"
-      alignItems="center"
-      alignDirection="center"
-      width={[1, 1, 1, 1]}
-    >
-      <Flex flexDirection={['column', 'row']} width={[1, 1, 1, 1]}>
-        <Box p={3} width={[1, 1, 1 / 2, 1 / 2]}>
-          <Image
-            src={realPicUrl}
-            sx={{
-              objectFit: 'cover',
-              height: ['250px', '300px', '400px', '500px'],
-              animationName: (theme) => theme.animations.fadeIn[0],
-              animationTimingFunction: 'ease-in',
-              animationDuration: '500ms',
-            }}
-          />
-        </Box>
-        <Box p={[1, 3]} width={[1, 1, 1 / 2, 1 / 2]}>
-          <LegendInfo legend={legend} />
+    <>
+      <Head>
+        <title>{legend.general.fullName} - The Hall of Legends</title>
+      </Head>
+      <Flex
+        flexDirection="column"
+        alignItems="center"
+        alignDirection="center"
+        width={[1, 1, 1, 1]}
+      >
+        <Flex flexDirection={['column', 'row']} width={[1, 1, 1, 1]}>
+          <Box p={3} width={[1, 1, 1 / 2, 1 / 2]}>
+            <Image
+              src={realPicUrl}
+              sx={{
+                objectFit: 'cover',
+                height: ['250px', '300px', '400px', '500px'],
+                animationName: (theme) => theme.animations.fadeIn[0],
+                animationTimingFunction: 'ease-in',
+                animationDuration: '500ms',
+              }}
+            />
+          </Box>
+          <Box p={[1, 3]} width={[1, 1, 1 / 2, 1 / 2]}>
+            <LegendInfo legend={legend} />
+          </Box>
+        </Flex>
+        <Box
+          pb={2}
+          sx={{
+            animationName: (theme) => theme.animations.fadeIn[2],
+            animationTimingFunction: 'ease-in',
+            animationDuration: '1000ms',
+          }}
+        >
+          <Text
+            fontSize={[1, 1, 2, 3]}
+            maxWidth={['100%', '100%', '75%', '75%']}
+          >
+            {legend.general.mainDesc.split('\\n').map((item, i) => (
+              <p key={i}>{item}</p>
+            ))}
+          </Text>
         </Box>
       </Flex>
-      <Box
-        pb={2}
-        sx={{
-          animationName: (theme) => theme.animations.fadeIn[2],
-          animationTimingFunction: 'ease-in',
-          animationDuration: '1000ms',
-        }}
-      >
-        <Text fontSize={[1, 1, 2, 3]} maxWidth={['100%', '100%', '75%', '75%']}>
-          {legend.general.mainDesc.split('\\n').map((item, i) => (
-            <p key={i}>{item}</p>
-          ))}
-        </Text>
-      </Box>
-    </Flex>
+    </>
   );
 };
 

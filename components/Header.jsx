@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
 import NextLink from 'next/link';
-import { Flex, Box, Heading, Link } from 'rebass';
+import { Flex, Box, Image, Link } from 'rebass';
 
 const Header = () => (
   <header>
@@ -14,18 +14,23 @@ const Header = () => (
       alignItems="center"
       mb={3}
     >
-      <Heading p={2} fontWeight="bold">
-        <NextLink href="/" passHref>
-          <Link
-            variant="header"
+      <NextLink href="/" passHref>
+        <Link
+          p={2}
+          variant="header"
+          sx={{
+            transition: 'all 0.1s linear',
+          }}
+        >
+          <Image
+            src="/HallOfLegendsLogo.png"
+            alt="The Hall of Legends"
             sx={{
-              transition: 'all 0.1s linear',
+              height: ['30px', '30px', '40px', '50px'],
             }}
-          >
-            The Hall of Legends
-          </Link>
-        </NextLink>
-      </Heading>
+          />
+        </Link>
+      </NextLink>
       <Box mx="auto" />
     </Flex>
   </header>
