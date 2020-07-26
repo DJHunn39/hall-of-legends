@@ -77,16 +77,18 @@ const LegendStats = ({ seasons }) => {
       <Box
         sx={{
           display: 'grid',
-          gridGap: [1, 2],
+          gridGap: [1, 1, 1, 2],
           gridTemplateColumns: 'repeat(12, minmax(10px, 1fr))',
           gridTemplateRows: [
+            'repeat(3, minmax(10px, 1fr))',
+            'repeat(3, minmax(10px, 1fr))',
             'repeat(3, minmax(10px, 1fr))',
             'repeat(2, minmax(30px, 1fr))',
           ],
         }}
       >
         <Box
-          p={[1, 3]}
+          p={[1, 1, 1, 3]}
           sx={{
             gridColumnStart: 1,
             gridColumnEnd: 'span 4',
@@ -96,7 +98,7 @@ const LegendStats = ({ seasons }) => {
           <Stat stat="Games" value={games} image="pitch" />
         </Box>
         <Box
-          p={[1, 3]}
+          p={[1, 1, 1, 3]}
           sx={{
             gridColumnStart: 5,
             gridColumnEnd: 'span 4',
@@ -106,7 +108,7 @@ const LegendStats = ({ seasons }) => {
           <Stat stat="Goals" value={goals} image="football" />
         </Box>
         <Box
-          p={[1, 3]}
+          p={[1, 1, 1, 3]}
           sx={{
             gridColumnStart: 9,
             gridColumnEnd: 'span 4',
@@ -116,10 +118,10 @@ const LegendStats = ({ seasons }) => {
           <Stat stat="Assists" value={assists} image="assist" />
         </Box>
         <Box
-          p={[1, 3]}
+          p={[1, 1, 1, 3]}
           sx={{
             gridColumnStart: 1,
-            gridColumnEnd: ['span 6', 'span 3'],
+            gridColumnEnd: ['span 6', 'span 6', 'span 6', 'span 3'],
             gridRowStart: 2,
           }}
         >
@@ -130,10 +132,10 @@ const LegendStats = ({ seasons }) => {
           />
         </Box>
         <Box
-          p={[1, 3]}
+          p={[1, 1, 1, 3]}
           sx={{
-            gridColumnStart: [7, 4],
-            gridColumnEnd: ['span 6', 'span 3'],
+            gridColumnStart: [7, 7, 7, 4],
+            gridColumnEnd: ['span 6', 'span 6', 'span 6', 'span 3'],
             gridRowStart: 2,
           }}
         >
@@ -144,11 +146,11 @@ const LegendStats = ({ seasons }) => {
           />
         </Box>
         <Box
-          p={[1, 3]}
+          p={[1, 1, 1, 3]}
           sx={{
-            gridColumnStart: [1, 7],
-            gridColumnEnd: ['span 6', 'span 3'],
-            gridRowStart: [3, 2],
+            gridColumnStart: [1, 1, 1, 7],
+            gridColumnEnd: ['span 6', 'span 6', 'span 6', 'span 3'],
+            gridRowStart: [3, 3, 3, 2],
           }}
         >
           <Stat
@@ -158,11 +160,11 @@ const LegendStats = ({ seasons }) => {
           />
         </Box>
         <Box
-          p={[1, 3]}
+          p={[1, 1, 1, 3]}
           sx={{
-            gridColumnStart: [7, 10],
-            gridColumnEnd: ['span 6', 'span 3'],
-            gridRowStart: [3, 2],
+            gridColumnStart: [7, 7, 7, 10],
+            gridColumnEnd: ['span 6', 'span 6', 'span 6', 'span 3'],
+            gridRowStart: [3, 3, 3, 2],
           }}
         >
           <Stat

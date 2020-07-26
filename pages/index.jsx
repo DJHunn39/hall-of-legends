@@ -1,12 +1,27 @@
 /** @jsx jsx */
 import getAllLegends from '../database/getAllLegends';
+import { useState } from 'react';
+import SearchInput, { createFilter } from 'react-search-input';
 import { jsx } from 'theme-ui';
 import Head from 'next/head';
 import { Flex, Box, Heading, Text } from 'rebass';
 import LegendListEntry from '../components/LegendListEntry/LegendListEntry';
 
+const KEYS_TO_FILTER = ['general.fullName'];
+
 const Home = ({ legends }) => {
   const parsedLegends = JSON.parse(legends);
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const searchUpdated = (term) => {
+    setSearchTerm(term);
+  };
+
+  const filteredLegends = parsedLegends.filter(
+    createFilter(searchTerm, KEYS_TO_FILTER),
+  );
+
   return (
     <div className="container">
       <Head>
@@ -16,50 +31,45 @@ const Home = ({ legends }) => {
         <Box flexGrow={2} p={3} width={1}>
           <Heading fontSize={[5, 6, 7]}>The Hall of Legends</Heading>
         </Box>
-
         <Flex flexDirection="column" width={[1, 1, 1, 1]}>
+          <SearchInput
+            className="search-input"
+            onChange={searchUpdated}
+            sx={{
+              '.search-input': {
+                background: 'blue',
+              },
+            }}
+          />
           <Flex
-            my={3}
+            m={1}
             flexDirection="row"
             alignItems="center"
-            justifyContent="flex-start"
             width={[1, 1, 1, 1]}
           >
-            <Text mx={3} width={1 / 3} fontSize={[1, 2, 3]} fontWeight="bold">
+            <Text width={1 / 3} fontSize={[1, 2, 3]} fontWeight="bold">
               Name
             </Text>
-            <Text fontSize={[1, 2, 3]} mx={3} width={1 / 8}>
+            <Text fontSize={[1, 2, 3]} width={1 / 8}>
               Position
             </Text>
-            <Text fontSize={[1, 2, 3]} mx={3} width={1 / 4}>
+            <Text fontSize={[1, 2, 3]} width={1 / 4}>
               Nation
             </Text>
           </Flex>
-          <ul>
-            {parsedLegends.map((legend) => (
-              <li
-                key={legend._id}
-                sx={{
-                  listStyle: 'none',
-                }}
-              >
-                <LegendListEntry legend={legend} />
-              </li>
-            ))}
-          </ul>
+          {filteredLegends.map((legend, index) => (
+            <LegendListEntry
+              key={legend._id}
+              legend={legend}
+              bg={
+                index % 2 === 0
+                  ? 'rgba(209, 203, 203, 0.4)'
+                  : 'rgba(209, 203, 203, 0)'
+              }
+            />
+          ))}
         </Flex>
       </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
     </div>
   );
 };

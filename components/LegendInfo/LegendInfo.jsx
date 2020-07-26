@@ -1,5 +1,5 @@
 import { Flex } from 'rebass';
-import LegendGeneral from './LegendGeneral/LegendGeneral';
+import LegendGeneral from '../LegendGeneral/LegendGeneral';
 import LegendStats from '../LegendStats/LegendStats';
 
 const LegendInfo = ({ legend }) => (

@@ -72,7 +72,7 @@ const theme = {
   },
   sizes: {
     avatar: 48,
-    contentContainer: 1200,
+    contentContainer: ['90%', 1200],
   },
   radii: {
     default: 4,
@@ -128,10 +128,7 @@ const theme = {
     nav: {
       borderBottomStyle: 'solid',
       borderBottomColor: '#ffffff00',
-      fontSize: 1,
-      fontWeight: 'bold',
       display: 'inline-block',
-      p: 2,
       color: 'inherit',
       textDecoration: 'none',
       ':visited': {
@@ -139,6 +136,17 @@ const theme = {
       },
       ':hover,:focus,.active': {
         borderBottomColor: 'text',
+      },
+    },
+    block: {
+      textDecoration: 'none',
+      color: 'text',
+      ':visited': {
+        color: 'text',
+      },
+      ':hover,:focus,.active': {
+        background: 'rgba(255, 255, 255)',
+        color: 'black',
       },
     },
   },
@@ -243,9 +251,6 @@ const theme = {
       textAlign: 'left',
       borderBottomStyle: 'solid',
     },
-    // img: {
-    //   maxWidth: '100%',
-    // },
   },
 };
 
