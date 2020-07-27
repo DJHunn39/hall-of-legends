@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@rebass/forms": "^4.0.6",
     "@rebass/preset": "^4.0.5",
     "@theme-ui/presets": "^0.3.0",
     "axios": "^0.19.2",

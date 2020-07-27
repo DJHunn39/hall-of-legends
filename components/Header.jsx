@@ -10,7 +10,7 @@ const Header = () => (
       px={2}
       py={1}
       color="white"
-      bg="black"
+      bg="#282727"
       alignItems="center"
       mb={3}
     >
