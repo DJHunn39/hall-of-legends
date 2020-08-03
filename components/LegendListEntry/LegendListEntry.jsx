@@ -1,20 +1,12 @@
-import { Flex, Box, Text, Image, Link } from 'rebass';
+import { Flex, Text, Link } from 'rebass';
 import NextLink from 'next/link';
-import countryCodes from '../../constants/countryCodes.js';
+import Nation from '../Nation/Nation';
 
 const LegendListEntry = ({ legend, bg }) => {
   const {
     _id,
     general: { fullName, nation, position },
   } = legend;
-
-  const localFlags = ['england', 'wales', 'scotland', 'northernireland'];
-
-  const flagSource = countryCodes[nation]
-    ? `https://www.countryflags.io/${countryCodes[nation]}/shiny/24.png`
-    : localFlags.includes(nation.toLowerCase())
-    ? `/${nation.toLowerCase()}.png`
-    : '/unitednations.png';
 
   return (
     <NextLink href="/players/[id]" as={`/players/${_id}`} passHref>
@@ -40,8 +32,7 @@ const LegendListEntry = ({ legend, bg }) => {
             {position}
           </Text>
           <Flex flexDirection="row" alignItems="center" width={1 / 4}>
-            <Image src={flagSource} mr={1} />
-            <Text fontSize={[1, 2, 3]}>{nation}</Text>
+            <Nation nation={nation} />
           </Flex>
         </Flex>
       </Link>

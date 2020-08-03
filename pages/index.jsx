@@ -4,9 +4,10 @@ import { useState } from 'react';
 import SearchInput, { createFilter } from 'react-search-input';
 import { jsx } from 'theme-ui';
 import Head from 'next/head';
-import { Flex, Box, Image, Text } from 'rebass';
-import { Label, Checkbox } from '@rebass/forms';
+import { Flex, Box, Image, Text, Heading } from 'rebass';
 import LegendListEntry from '../components/LegendListEntry/LegendListEntry';
+import CustomCollapse from '../components/CustomCollapse/CustomCollapse';
+import CustomCheckbox from '../components/CustomCheckbox/CustomCheckbox';
 
 const KEYS_TO_FILTER = ['general.fullName'];
 
@@ -32,13 +33,19 @@ const createFilterByFacets = (facets) => {
       positionMatch = true;
 
     if (facets.position || facets.nation) {
-      if (facets.nation && value.general.nation !== facets.nation) {
+      if (
+        facets.nation.length > 0 &&
+        !facets.nation.reduce(
+          (acc, curr) => (acc ? acc : value.general.nation === curr),
+          false,
+        )
+      ) {
         nationMatch = false;
       }
       if (
         facets.position.length > 0 &&
         !facets.position.reduce(
-          (acc, curr) => (acc ? acc : value.general.position.includes(curr)),
+          (acc, curr) => (acc ? acc : value.general.position === curr),
           false,
         )
       ) {
@@ -54,7 +61,7 @@ const Home = ({ legends }) => {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [facets, setFacets] = useState({
-    nation: '',
+    nation: [],
     position: [],
   });
 
@@ -62,25 +69,32 @@ const Home = ({ legends }) => {
     setSearchTerm(term);
   };
 
-  const updatePosition = ({ target: { id, checked } }) => {
-    const positionIndex = facets.position.indexOf(id);
-    const newPositions = facets.position;
+  const updateFacet = (facet) => ({ target: { id, checked } }) => {
+    const facetIndex = facets[facet].indexOf(id);
+    const newValues = facets[facet];
 
-    if (checked && positionIndex === -1) {
-      newPositions.push(id);
+    if (checked && facetIndex === -1) {
+      newValues.push(id);
     } else {
-      newPositions.splice(positionIndex, 1);
+      newValues.splice(facetIndex, 1);
     }
 
     setFacets({
       ...facets,
-      position: newPositions,
+      [facet]: newValues,
     });
   };
 
   const filteredLegends = parsedLegends
     .filter(createFilterByFacets(facets))
     .filter(createFilter(searchTerm, KEYS_TO_FILTER));
+
+  const nations = parsedLegends.reduce((acc, curr) => {
+    if (acc.indexOf(curr) < 0) {
+      acc.push(curr.general.nation);
+    }
+    return acc;
+  }, []);
 
   return (
     <div className="container">
@@ -95,42 +109,43 @@ const Home = ({ legends }) => {
         </Box>
         <Flex flexDirection={['column', 'row']}>
           <Flex flexDirection="column" width={[1, 1, 1 / 4, 1 / 4]}>
-            <SearchInput
-              className="search-input"
-              onChange={searchUpdated}
-              sx={{
-                '.search-input': {
-                  background: 'blue',
-                },
-              }}
-            />
-            <Text>Position</Text>
-            {POSITIONS.map((position, index) => (
-              <Label key={`position-check-${index}`} p={2}>
-                <Checkbox
-                  key={`position-${index}`}
-                  id={position}
-                  name={position}
-                  value={position}
-                  onChange={updatePosition}
-                  color="white"
-                  sx={{
-                    'input:checked ~ &': {
-                      color: 'white',
-                    },
-                    'input:focus ~ &': {
-                      color: 'white',
-                      bg: 'rgba(255, 255, 255, 0.5)',
-                    },
-                    'input:hover ~ &': {
-                      color: 'black',
-                      bg: 'white',
-                    },
-                  }}
+            <Heading
+              m={[1, 2, 2, 2]}
+              as="h2"
+              fontSize={[2, 2, 3, 4]}
+              color="text"
+            >
+              Filters
+            </Heading>
+            <Box m={[1, 2, 2, 2]}>
+              <SearchInput
+                className="search-input"
+                onChange={searchUpdated}
+                sx={{
+                  '.search-input': {
+                    background: 'blue',
+                  },
+                }}
+              />
+            </Box>
+            <CustomCollapse triggerText="Position">
+              {POSITIONS.map((position, index) => (
+                <CustomCheckbox
+                  labelText={position}
+                  onChange={updateFacet('position')}
+                  index={index}
                 />
-                {position}
-              </Label>
-            ))}
+              ))}
+            </CustomCollapse>
+            <CustomCollapse triggerText="Nation">
+              {nations.map((nation, index) => (
+                <CustomCheckbox
+                  labelText={nation}
+                  onChange={updateFacet('nation')}
+                  index={index}
+                />
+              ))}
+            </CustomCollapse>
           </Flex>
           <Flex flexDirection="column" width={[1, 1, 3 / 4, 3 / 4]}>
             <Flex
