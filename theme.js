@@ -152,6 +152,7 @@ const theme = {
   },
   buttons: {
     primary: {
+      transition: 'all 0.1s linear',
       fontSize: 2,
       fontWeight: 'bold',
       color: 'background',
@@ -159,15 +160,25 @@ const theme = {
       borderRadius: 'default',
     },
     outline: {
+      borderStyle: 'solid',
+      borderColor: '#ffffff00',
+      borderWidth: '3px',
       variant: 'buttons.primary',
       color: 'primary',
       bg: 'transparent',
-      boxShadow: 'inset 0 0 2px',
+      ':hover,:focus,.active': {
+        borderBottomColor: 'white',
+      },
     },
     secondary: {
       variant: 'buttons.primary',
       color: 'background',
       bg: 'secondary',
+    },
+    active: {
+      variant: 'buttons.primary',
+      color: 'black',
+      bg: 'white',
     },
   },
   styles: {

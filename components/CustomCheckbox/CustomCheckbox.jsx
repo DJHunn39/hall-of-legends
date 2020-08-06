@@ -12,6 +12,7 @@ const CustomCheckbox = ({ labelText, onChange, index }) => (
       onChange={onChange}
       color="white"
       sx={{
+        textOverflow: 'ellipsis',
         transition: 'all 0.1s linear',
         'input:checked ~ &': {
           color: 'white',

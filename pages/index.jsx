@@ -4,12 +4,15 @@ import { useState } from 'react';
 import SearchInput, { createFilter } from 'react-search-input';
 import { jsx } from 'theme-ui';
 import Head from 'next/head';
-import { Flex, Box, Image, Text, Heading } from 'rebass';
+import { Flex, Box, Image, Text, Heading, Button } from 'rebass';
 import LegendListEntry from '../components/LegendListEntry/LegendListEntry';
 import CustomCollapse from '../components/CustomCollapse/CustomCollapse';
 import CustomCheckbox from '../components/CustomCheckbox/CustomCheckbox';
+import { ultimateTeams } from '../constants/futConstants';
 
 const KEYS_TO_FILTER = ['general.fullName'];
+
+const { HUNNSNAL, BORUSSIA } = ultimateTeams;
 
 const POSITIONS = [
   'GK',
@@ -30,8 +33,12 @@ const POSITIONS = [
 const createFilterByFacets = (facets) => {
   return (value) => {
     let nationMatch = true,
-      positionMatch = true;
+      positionMatch = true,
+      clubMatch = true;
 
+    if (value.club !== facets.club) {
+      clubMatch = false;
+    }
     if (facets.position || facets.nation) {
       if (
         facets.nation.length > 0 &&
@@ -52,7 +59,7 @@ const createFilterByFacets = (facets) => {
         positionMatch = false;
       }
     }
-    return nationMatch && positionMatch;
+    return nationMatch && positionMatch && clubMatch;
   };
 };
 
@@ -63,11 +70,18 @@ const Home = ({ legends }) => {
   const [facets, setFacets] = useState({
     nation: [],
     position: [],
+    club: HUNNSNAL,
   });
 
   const searchUpdated = (term) => {
     setSearchTerm(term);
   };
+
+  const updateClub = (club) => () =>
+    setFacets({
+      ...facets,
+      club,
+    });
 
   const updateFacet = (facet) => ({ target: { id, checked } }) => {
     const facetIndex = facets[facet].indexOf(id);
@@ -89,12 +103,14 @@ const Home = ({ legends }) => {
     .filter(createFilterByFacets(facets))
     .filter(createFilter(searchTerm, KEYS_TO_FILTER));
 
-  const nations = parsedLegends.reduce((acc, curr) => {
-    if (acc.indexOf(curr) < 0) {
-      acc.push(curr.general.nation);
-    }
-    return acc;
-  }, []);
+  const nations = parsedLegends
+    .reduce((acc, curr) => {
+      if (acc.indexOf(curr.general.nation) < 0) {
+        acc.push(curr.general.nation);
+      }
+      return acc;
+    }, [])
+    .sort();
 
   return (
     <div className="container">
@@ -117,6 +133,36 @@ const Home = ({ legends }) => {
             >
               Filters
             </Heading>
+            <Flex
+              justifyContent="space-around"
+              flexDirection="row"
+              m={[1, 2, 2, 2]}
+            >
+              <Button
+                onClick={updateClub(HUNNSNAL)}
+                variant={facets.club === HUNNSNAL ? 'active' : 'outline'}
+              >
+                <Image
+                  sx={{
+                    maxHeight: ['30px', '30px', '30px', '50px'],
+                  }}
+                  src="/hunnsnalBadge.png"
+                  alt="Hunnsnal"
+                />
+              </Button>
+              <Button
+                onClick={updateClub(BORUSSIA)}
+                variant={facets.club !== HUNNSNAL ? 'active' : 'outline'}
+              >
+                <Image
+                  sx={{
+                    maxHeight: ['30px', '30px', '30px', '50px'],
+                  }}
+                  src="/borussiaBadge.png"
+                  alt="Borussia Munchenflapjack"
+                />
+              </Button>
+            </Flex>
             <Box m={[1, 2, 2, 2]}>
               <SearchInput
                 className="search-input"
@@ -129,22 +175,28 @@ const Home = ({ legends }) => {
               />
             </Box>
             <CustomCollapse triggerText="Position">
-              {POSITIONS.map((position, index) => (
-                <CustomCheckbox
-                  labelText={position}
-                  onChange={updateFacet('position')}
-                  index={index}
-                />
-              ))}
+              <Flex maxHeight="200px" flexDirection="column" flexWrap="wrap">
+                {POSITIONS.map((position, index) => (
+                  <Box width="1 / 3">
+                    <CustomCheckbox
+                      labelText={position}
+                      onChange={updateFacet('position')}
+                      index={index}
+                    />
+                  </Box>
+                ))}
+              </Flex>
             </CustomCollapse>
             <CustomCollapse triggerText="Nation">
-              {nations.map((nation, index) => (
-                <CustomCheckbox
-                  labelText={nation}
-                  onChange={updateFacet('nation')}
-                  index={index}
-                />
-              ))}
+              <Flex maxHeight="200px" overflowY="scroll" flexDirection="column">
+                {nations.map((nation, index) => (
+                  <CustomCheckbox
+                    labelText={nation}
+                    onChange={updateFacet('nation')}
+                    index={index}
+                  />
+                ))}
+              </Flex>
             </CustomCollapse>
           </Flex>
           <Flex flexDirection="column" width={[1, 1, 3 / 4, 3 / 4]}>
@@ -154,13 +206,13 @@ const Home = ({ legends }) => {
               alignItems="center"
               width={[1, 1, 1, 1]}
             >
-              <Text width={1 / 3} fontSize={[1, 2, 3]} fontWeight="bold">
+              <Text fontSize={[1, 2, 3]} width={1 / 3} fontWeight="bold">
                 Name
               </Text>
-              <Text fontSize={[1, 2, 3]} width={1 / 8}>
+              <Text fontSize={[1, 2, 3]} width={1 / 5}>
                 Position
               </Text>
-              <Text fontSize={[1, 2, 3]} width={1 / 4}>
+              <Text fontSize={[1, 2, 3]} width={1 / 5}>
                 Nation
               </Text>
             </Flex>

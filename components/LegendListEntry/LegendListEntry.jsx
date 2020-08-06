@@ -28,10 +28,10 @@ const LegendListEntry = ({ legend, bg }) => {
           <Text fontSize={[1, 2, 3]} width={1 / 3}>
             {fullName}
           </Text>
-          <Text fontSize={[1, 2, 3]} width={1 / 8}>
+          <Text fontSize={[1, 2, 3]} width={1 / 5}>
             {position}
           </Text>
-          <Flex flexDirection="row" alignItems="center" width={1 / 4}>
+          <Flex flexDirection="row" alignItems="center" width={1 / 5}>
             <Nation nation={nation} />
           </Flex>
         </Flex>
