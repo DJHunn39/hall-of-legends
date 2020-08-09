@@ -149,10 +149,23 @@ const Home = ({ legends }) => {
         <title>Home - The Hall of Legends</title>
       </Head>
       <main>
-        <Box flexGrow={2} p={3} width={1}>
+        <Box flexGrow={2} px={3} pt={[1, 2, 3, 3]} pb={1} width={1}>
           <h1>
             <Image src="/HallOfLegendsLogoAlt.png" alt="The Hall of Legends" />
           </h1>
+        </Box>
+        <Box m="auto" mb={3} width={[1, 1, 3 / 4, 3 / 4]}>
+          <Text mb={3} fontSize={1}>
+            The Hall of Legends is the hallowed home for all FIFA Ultimate Team
+            legends, old and new. To become a Legend, a player can do one or
+            many things. Score lots of goals. Turn up in the biggest of moments.
+            Attain a funny nickname. Each of these paths to legendary status as
+            as valid as any other, and all of the legends listed here have truly
+            earned their place. Feel free to browse the inventory of incredible
+            players, and enjoy some enthralling, entertaining, and thoroughly
+            pointless stories of football majesty.
+          </Text>
+          <Text fontSize={1}>Welcome to The Hall of Legends.</Text>
         </Box>
         <Flex flexDirection={['column', 'row']}>
           <Flex flexDirection="column" width={[1, 1, 1 / 4, 1 / 4]}>
