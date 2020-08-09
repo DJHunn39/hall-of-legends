@@ -5,6 +5,7 @@ import Nation from '../Nation/Nation';
 const LegendListEntry = ({ legend, bg }) => {
   const {
     _id,
+    clubRank,
     general: { fullName, nation, position },
   } = legend;
 
@@ -25,6 +26,9 @@ const LegendListEntry = ({ legend, bg }) => {
           width={[1, 1, 1, 1]}
           bg={bg}
         >
+          <Text fontSize={[1, 2, 3]} width={1 / 8}>
+            {clubRank}
+          </Text>
           <Text fontSize={[1, 2, 3]} width={1 / 3}>
             {fullName}
           </Text>

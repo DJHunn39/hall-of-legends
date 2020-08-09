@@ -30,11 +30,29 @@ const POSITIONS = [
   'ST',
 ];
 
+const SEASONS = [
+  '2010',
+  '2011',
+  '2012',
+  '2013',
+  '2014',
+  '2015',
+  '2016',
+  '2017',
+  '2018',
+  '2019',
+  '2020',
+];
+
+const checkSeason = ({ seasons }, season) =>
+  seasons.reduce((acc, curr) => (acc ? acc : season === curr.year), false);
+
 const createFilterByFacets = (facets) => {
   return (value) => {
     let nationMatch = true,
       positionMatch = true,
-      clubMatch = true;
+      clubMatch = true,
+      seasonMatch = true;
 
     if (value.club !== facets.club) {
       clubMatch = false;
@@ -59,7 +77,18 @@ const createFilterByFacets = (facets) => {
         positionMatch = false;
       }
     }
-    return nationMatch && positionMatch && clubMatch;
+    if (facets.season) {
+      if (
+        facets.season.length > 0 &&
+        !facets.season.reduce(
+          (acc, curr) => (acc ? acc : checkSeason(value, curr)),
+          false,
+        )
+      ) {
+        seasonMatch = false;
+      }
+    }
+    return nationMatch && positionMatch && clubMatch && seasonMatch;
   };
 };
 
@@ -71,6 +100,7 @@ const Home = ({ legends }) => {
     nation: [],
     position: [],
     club: HUNNSNAL,
+    season: [],
   });
 
   const searchUpdated = (term) => {
@@ -101,9 +131,10 @@ const Home = ({ legends }) => {
 
   const filteredLegends = parsedLegends
     .filter(createFilterByFacets(facets))
-    .filter(createFilter(searchTerm, KEYS_TO_FILTER));
+    .filter(createFilter(searchTerm, KEYS_TO_FILTER))
+    .sort((a, b) => a.clubRank - b.clubRank);
 
-  const nations = parsedLegends
+  const nations = filteredLegends
     .reduce((acc, curr) => {
       if (acc.indexOf(curr.general.nation) < 0) {
         acc.push(curr.general.nation);
@@ -174,6 +205,19 @@ const Home = ({ legends }) => {
                 }}
               />
             </Box>
+            <CustomCollapse triggerText="Season">
+              <Flex maxHeight="200px" flexDirection="column" flexWrap="wrap">
+                {SEASONS.map((season, index) => (
+                  <Box width="1 / 3">
+                    <CustomCheckbox
+                      labelText={season}
+                      onChange={updateFacet('season')}
+                      index={index}
+                    />
+                  </Box>
+                ))}
+              </Flex>
+            </CustomCollapse>
             <CustomCollapse triggerText="Position">
               <Flex maxHeight="200px" flexDirection="column" flexWrap="wrap">
                 {POSITIONS.map((position, index) => (
@@ -206,13 +250,16 @@ const Home = ({ legends }) => {
               alignItems="center"
               width={[1, 1, 1, 1]}
             >
+              <Text fontSize={[1, 2, 3]} width={1 / 8} fontWeight="bold">
+                Rank
+              </Text>
               <Text fontSize={[1, 2, 3]} width={1 / 3} fontWeight="bold">
                 Name
               </Text>
-              <Text fontSize={[1, 2, 3]} width={1 / 5}>
+              <Text fontSize={[1, 2, 3]} width={1 / 5} fontWeight="bold">
                 Position
               </Text>
-              <Text fontSize={[1, 2, 3]} width={1 / 5}>
+              <Text fontSize={[1, 2, 3]} width={1 / 5} fontWeight="bold">
                 Nation
               </Text>
             </Flex>
