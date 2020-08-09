@@ -106,9 +106,17 @@ const theme = {
       borderRadius: 'circle',
     },
     card: {
+      transition: 'all 0.2s linear',
       p: 2,
-      bg: 'background',
+      bg: 'rgba(0, 0, 0, 0.4)',
       boxShadow: 'card',
+      borderStyle: 'solid',
+      borderWidth: '2px',
+      borderColor: 'white',
+      ':hover,:focus,.active': {
+        background: 'white',
+        color: 'black',
+      },
     },
     link: {
       color: 'primary',
@@ -139,14 +147,31 @@ const theme = {
       },
     },
     block: {
+      transition: 'all 0.2s linear',
+      p: 2,
       textDecoration: 'none',
-      color: 'text',
-      ':visited': {
-        color: 'text',
-      },
+      bg: 'rgba(0, 0, 0, 0.4)',
+      boxShadow: 'card',
+      borderStyle: 'solid',
+      borderWidth: '2px',
+      borderColor: 'white',
+      textDecoration: 'none',
       ':hover,:focus,.active': {
-        background: 'rgba(255, 255, 255)',
+        background: 'white',
         color: 'black',
+      },
+    },
+    blockLink: {
+      textDecoration: 'none',
+      color: 'white',
+      ':hover,:focus,.active': {
+        color: 'black',
+        ':visited': {
+          color: 'black',
+        },
+      },
+      ':visited': {
+        color: 'white',
       },
     },
   },

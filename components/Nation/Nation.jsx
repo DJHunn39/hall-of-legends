@@ -16,7 +16,14 @@ const Nation = ({ nation }) => {
   return (
     <>
       <Image src={flagSource} mr={1} />
-      <Text fontSize={[1, 2, 3]}>{nation}</Text>
+      <Text
+        fontSize={[1, 2, 3]}
+        sx={{
+          textOverflow: 'ellipsis',
+        }}
+      >
+        {nation}
+      </Text>
     </>
   );
 };
