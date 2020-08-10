@@ -7,7 +7,12 @@ export default (props) => (
     {...props}
     sx={{
       display: 'grid',
-      gridTemplateColumns: '1fr 1fr 1fr 1fr',
+      gridTemplateColumns: [
+        'repeat(1, 1fr)',
+        'repeat(3, 1fr)',
+        'repeat(4, 1fr)',
+        'repeat(4, 1fr)',
+      ],
       alignItems: 'stretch',
       gridGap: 3, // theme.space[3]
     }}

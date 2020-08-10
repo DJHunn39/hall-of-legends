@@ -168,7 +168,7 @@ const Home = ({ legends }) => {
           </Text>
           <Text fontSize={1}>Welcome to The Hall of Legends.</Text>
         </Box>
-        <Flex flexDirection={['column', 'row']}>
+        <Flex flexDirection={['column', 'column', 'row', 'row']}>
           <Flex flexDirection="column" width={[1, 1, 1 / 4, 1 / 4]}>
             <Heading
               m={[1, 2, 2, 2]}

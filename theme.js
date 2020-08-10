@@ -150,29 +150,25 @@ const theme = {
       transition: 'all 0.2s linear',
       p: 2,
       textDecoration: 'none',
+      color: 'white',
       bg: 'rgba(0, 0, 0, 0.4)',
       boxShadow: 'card',
       borderStyle: 'solid',
       borderWidth: '2px',
       borderColor: 'white',
-      textDecoration: 'none',
+      alignItems: 'center',
+      textAlign: 'center',
       ':hover,:focus,.active': {
         background: 'white',
         color: 'black',
       },
-    },
-    blockLink: {
-      textDecoration: 'none',
-      color: 'white',
-      ':hover,:focus,.active': {
-        color: 'black',
-        ':visited': {
-          color: 'black',
-        },
-      },
       ':visited': {
         color: 'white',
       },
+    },
+    blockLink: {
+      textDecoration: 'none',
+      color: 'inherit',
     },
   },
   buttons: {
@@ -261,7 +257,17 @@ const theme = {
       lineHeight: 'body',
     },
     a: {
-      color: 'primary',
+      textDecoration: 'none',
+      color: 'white',
+      ':hover,:focus,.active': {
+        color: 'black',
+        ':visited': {
+          color: 'black',
+        },
+      },
+      ':visited': {
+        color: 'white',
+      },
     },
     pre: {
       fontFamily: 'monospace',
