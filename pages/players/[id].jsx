@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import LegendInfo from '../../components/LegendInfo/LegendInfo';
 import Hattricks from '../../components/Hattricks/Hattricks';
+import CardsBreakdown from '../../components/CardsBreakdown/CardsBreakdown';
 
 const HallOfLegends = ({ legends }) => {
   const router = useRouter();
@@ -73,6 +74,25 @@ const HallOfLegends = ({ legends }) => {
               <p key={i}>{item}</p>
             ))}
           </Text>
+        </Box>
+        <Box
+          mb={2}
+          width={['100%', '100%', '75%', '75%']}
+          sx={{
+            animationName: (theme) => theme.animations.fadeIn[2],
+            animationTimingFunction: 'ease-in',
+            animationDuration: '1000ms',
+          }}
+        >
+          <Heading
+            my={[1, 2, 2, 2]}
+            as="h2"
+            fontSize={[2, 2, 3, 4]}
+            color="text"
+          >
+            Cards
+          </Heading>
+          <CardsBreakdown seasons={legend.seasons} />
         </Box>
         <Box
           mb={2}
