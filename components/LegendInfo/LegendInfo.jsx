@@ -4,7 +4,7 @@ import LegendStats from '../LegendStats/LegendStats';
 
 const LegendInfo = ({ legend }) => (
   <Flex
-    px={3}
+    px={[1, 1, 3, 3]}
     flexDirection="column"
     width={[1, 1, 1, 1]}
     sx={{

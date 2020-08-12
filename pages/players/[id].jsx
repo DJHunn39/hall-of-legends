@@ -1,9 +1,10 @@
 import getAllLegends from '../../database/getAllLegends';
 import getAllIds from '../../database/getAllIds';
-import { Flex, Box, Image, Text } from 'rebass';
+import { Flex, Box, Image, Text, Heading } from 'rebass';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import LegendInfo from '../../components/LegendInfo/LegendInfo';
+import Hattricks from '../../components/Hattricks/Hattricks';
 
 const HallOfLegends = ({ legends }) => {
   const router = useRouter();
@@ -25,39 +26,76 @@ const HallOfLegends = ({ legends }) => {
         alignDirection="center"
         width={[1, 1, 1, 1]}
       >
-        <Flex flexDirection={['column', 'row']} width={[1, 1, 1, 1]}>
-          <Box p={3} width={[1, 1, 1 / 2, 1 / 2]}>
-            <Image
-              src={realPicUrl}
-              sx={{
-                objectFit: 'cover',
-                height: ['250px', '300px', '400px', '500px'],
-                animationName: (theme) => theme.animations.fadeIn[0],
-                animationTimingFunction: 'ease-in',
-                animationDuration: '500ms',
-              }}
-            />
-          </Box>
+        <Flex
+          alignContent="center"
+          flexDirection={['column', 'row']}
+          width={[1, 1, 1, 1]}
+        >
+          <Image
+            p={3}
+            width={[1, 1, 1 / 2, 1 / 2]}
+            src={realPicUrl}
+            mx="auto"
+            sx={{
+              height: ['250px', '300px', '400px', '500px'],
+              maxWidth: ['250px', '300px', '400px', '500px'],
+              animationName: (theme) => theme.animations.fadeIn[0],
+              animationTimingFunction: 'ease-in',
+              animationDuration: '500ms',
+            }}
+          />
           <Box p={[1, 3]} width={[1, 1, 1 / 2, 1 / 2]}>
             <LegendInfo legend={legend} />
           </Box>
         </Flex>
         <Box
-          pb={2}
+          mb={2}
+          width={['100%', '100%', '75%', '75%']}
           sx={{
             animationName: (theme) => theme.animations.fadeIn[2],
             animationTimingFunction: 'ease-in',
             animationDuration: '1000ms',
           }}
         >
+          <Heading
+            my={[1, 2, 2, 2]}
+            as="h2"
+            fontSize={[2, 2, 3, 4]}
+            color="text"
+          >
+            Bio
+          </Heading>
           <Text
             fontSize={[1, 1, 2, 3]}
-            maxWidth={['100%', '100%', '75%', '75%']}
+            // maxWidth={['100%', '100%', '75%', '75%']}
           >
             {legend.general.mainDesc.split('\\n').map((item, i) => (
               <p key={i}>{item}</p>
             ))}
           </Text>
+        </Box>
+        <Box
+          mb={2}
+          width={['100%', '100%', '75%', '75%']}
+          sx={{
+            animationName: (theme) => theme.animations.fadeIn[2],
+            animationTimingFunction: 'ease-in',
+            animationDuration: '1000ms',
+          }}
+        >
+          {legend.highlights.hattricks[0].name && (
+            <>
+              <Heading
+                my={[1, 2, 2, 2]}
+                as="h2"
+                fontSize={[2, 2, 3, 4]}
+                color="text"
+              >
+                Hat-tricks
+              </Heading>
+              <Hattricks hattricks={legend.highlights.hattricks} />
+            </>
+          )}
         </Box>
       </Flex>
     </>

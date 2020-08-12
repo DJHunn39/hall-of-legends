@@ -14,8 +14,8 @@ const LegendGeneral = ({ general, club, cards }) => {
 
   const flagSource = countryCodes[nation]
     ? `https://www.countryflags.io/${countryCodes[nation]}/shiny/24.png`
-    : localFlags.includes(nation.replace(' ', '').toLowerCase())
-    ? `/${nation.toLowerCase()}.png`
+    : localFlags.includes(nation.replace(/\s/g, '').toLowerCase())
+    ? `/${nation.replace(/\s/g, '').toLowerCase()}.png`
     : '/unitednations.png';
 
   return (

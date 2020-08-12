@@ -9,8 +9,8 @@ const localFlags = ['england', 'wales', 'scotland', 'northernireland'];
 const Nation = ({ nation }) => {
   const flagSource = countryCodes[nation]
     ? `https://www.countryflags.io/${countryCodes[nation]}/shiny/24.png`
-    : localFlags.includes(nation.toLowerCase())
-    ? `/${nation.toLowerCase()}.png`
+    : localFlags.includes(nation.replace(/\s/g, '').toLowerCase())
+    ? `/${nation.replace(/\s/g, '').toLowerCase()}.png`
     : '/unitednations.png';
 
   return (
