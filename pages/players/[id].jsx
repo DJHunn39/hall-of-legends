@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import LegendInfo from '../../components/LegendInfo/LegendInfo';
 import Hattricks from '../../components/Hattricks/Hattricks';
+import Clips from '../../components/Clips/Clips';
 import CardsBreakdown from '../../components/CardsBreakdown/CardsBreakdown';
 
 const HallOfLegends = ({ legends }) => {
@@ -66,10 +67,7 @@ const HallOfLegends = ({ legends }) => {
           >
             Bio
           </Heading>
-          <Text
-            fontSize={[1, 1, 2, 3]}
-            // maxWidth={['100%', '100%', '75%', '75%']}
-          >
+          <Text fontSize={[1, 1, 2, 3]}>
             {legend.general.mainDesc.split('\\n').map((item, i) => (
               <p key={i}>{item}</p>
             ))}
@@ -114,6 +112,29 @@ const HallOfLegends = ({ legends }) => {
                 Hat-tricks
               </Heading>
               <Hattricks hattricks={legend.highlights.hattricks} />
+            </>
+          )}
+        </Box>
+        <Box
+          mb={2}
+          width={['100%', '100%', '75%', '75%']}
+          sx={{
+            animationName: (theme) => theme.animations.fadeIn[2],
+            animationTimingFunction: 'ease-in',
+            animationDuration: '1000ms',
+          }}
+        >
+          {legend.highlights.clips[0].name && (
+            <>
+              <Heading
+                my={[1, 2, 2, 2]}
+                as="h2"
+                fontSize={[2, 2, 3, 4]}
+                color="text"
+              >
+                Highlights
+              </Heading>
+              <Clips clips={legend.highlights.clips} />
             </>
           )}
         </Box>

@@ -1,12 +1,12 @@
 import React from 'react';
-import CardGrid from '../CardGrid/CardGrid';
+import HighlightGrid from '../HighlightGrid/HighlightGrid';
 import Hattrick from './Hattrick/Hattrick';
 
 const Hattricks = ({ hattricks }) => (
-  <CardGrid>
+  <HighlightGrid>
     {hattricks.map((hattrick, index) => (
       <Hattrick key={`hattrick-${index}`} hattrick={hattrick} />
     ))}
-  </CardGrid>
+  </HighlightGrid>
 );
 export default Hattricks;
