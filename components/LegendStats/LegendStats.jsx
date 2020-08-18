@@ -1,11 +1,6 @@
 import { Flex, Box } from 'rebass';
 import Stat from './Stat';
-
-const parseToBaseTen = (string) => parseInt(string, 10);
-
-const round = (value, decimals) => {
-  return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
-};
+import { roundStringIntsTwoDP, parseToBaseTen } from '../../utils/round';
 
 const getTotalStats = (seasons) => {
   const sumKeys = ['games', 'goals', 'assists'];
@@ -28,10 +23,7 @@ const getTotalStats = (seasons) => {
 
       const goalRatio =
         curr.data.games !== ''
-          ? round(
-              parseToBaseTen(curr.data.goals) / parseToBaseTen(curr.data.games),
-              2,
-            )
+          ? roundStringIntsTwoDP(curr.data.goals, curr.data.games)
           : 0;
 
       if (acc.best.goalRatio.value < goalRatio) {
