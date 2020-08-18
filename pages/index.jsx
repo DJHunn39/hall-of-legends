@@ -70,7 +70,7 @@ const createFilterByFacets = (facets) => {
       if (
         facets.position.length > 0 &&
         !facets.position.reduce(
-          (acc, curr) => (acc ? acc : value.general.position === curr),
+          (acc, curr) => (acc ? acc : value.general.position.includes(curr)),
           false,
         )
       ) {
