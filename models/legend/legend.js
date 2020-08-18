@@ -39,7 +39,7 @@ const Legend = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   club: {
     type: String,
-    enum: ['Borussia Munchenflapjack', 'Hunnsnal'],
+    enum: ['Borussia MunchenFlapJack', 'Hunnsnal'],
     required: 'league cannot be left blank.',
   },
   clubRank: { type: Number, min: 1 },

@@ -52,5 +52,5 @@ export const leagues = {
 
 export const ultimateTeams = {
   HUNNSNAL: 'Hunnsnal',
-  BORUSSIA: 'Borussia Munchenflapjack',
+  BORUSSIA: 'Borussia MunchenFlapJack',
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, Box, Text } from 'rebass';
 
 const Hattrick = ({ hattrick: { name, picUrl } }) =>
-  name && (
+  picUrl && (
     <Box
       sx={{
         display: 'grid',

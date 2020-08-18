@@ -101,19 +101,20 @@ const HallOfLegends = ({ legends }) => {
             animationDuration: '1000ms',
           }}
         >
-          {legend.highlights.hattricks[0].name && (
-            <>
-              <Heading
-                my={[1, 2, 2, 2]}
-                as="h2"
-                fontSize={[2, 2, 3, 4]}
-                color="text"
-              >
-                Hat-tricks
-              </Heading>
-              <Hattricks hattricks={legend.highlights.hattricks} />
-            </>
-          )}
+          {legend.highlights.hattricks[0] &&
+            legend.highlights.hattricks[0].picUrl && (
+              <>
+                <Heading
+                  my={[1, 2, 2, 2]}
+                  as="h2"
+                  fontSize={[2, 2, 3, 4]}
+                  color="text"
+                >
+                  Hat-tricks
+                </Heading>
+                <Hattricks hattricks={legend.highlights.hattricks} />
+              </>
+            )}
         </Box>
         <Box
           mb={2}
@@ -124,7 +125,7 @@ const HallOfLegends = ({ legends }) => {
             animationDuration: '1000ms',
           }}
         >
-          {legend.highlights.clips[0].name && (
+          {legend.highlights.clips[0] && legend.highlights.clips[0].youtubeId && (
             <>
               <Heading
                 my={[1, 2, 2, 2]}

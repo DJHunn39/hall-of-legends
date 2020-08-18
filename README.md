@@ -1,5 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+The project is for a simple webapp used for displaying information and statistics about FIFA Ultimate Team players for me and my flatmate's clubs from almost a decade of play.
+
 ## Getting Started
 
 First, run the development server:
@@ -10,9 +12,11 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+If you do not have access to the MongoDB instance used as the back-end of this application, you will not have the URL required to make calls to this back-end, and therefore you will not see any data rendered on the front-end.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+For security reasons, the MongoDB URL is not contained within this repository.
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Learn More
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from 'rebass';
+import { Box, Flex } from 'rebass';
 import { leagues } from '../../../constants/futConstants';
 import { roundStringIntsTwoDP } from '../../../utils/round';
 import CustomCollapse from '../../CustomCollapse/CustomCollapse';

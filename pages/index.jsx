@@ -212,7 +212,7 @@ const Home = ({ legends }) => {
                     maxHeight: ['30px', '30px', '30px', '50px'],
                   }}
                   src="/borussiaBadge.png"
-                  alt="Borussia Munchenflapjack"
+                  alt="Borussia MunchenFlapJack"
                 />
               </Button>
             </Flex>
