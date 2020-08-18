@@ -168,7 +168,16 @@ const Home = ({ legends }) => {
           <Text fontSize={1}>Welcome to The Hall of Legends.</Text>
         </Box>
         <Flex flexDirection={['column', 'column', 'row', 'row']}>
-          <Flex flexDirection="column" width={[1, 1, 1 / 4, 1 / 4]}>
+          <Flex
+            flexDirection="column"
+            pb="3"
+            width={[1, 1, 1 / 4, 1 / 4]}
+            sx={{
+              position: ['auto', 'auto', 'sticky', 'sticky'],
+              alignSelf: ['auto', 'auto', 'flex-start', 'flex-start'],
+              top: ['auto', 'auto', '20px', '20px'],
+            }}
+          >
             <Heading
               m={[1, 2, 2, 2]}
               as="h2"
@@ -219,9 +228,13 @@ const Home = ({ legends }) => {
               />
             </Box>
             <CustomCollapse triggerText="Season">
-              <Flex maxHeight="200px" flexDirection="column" flexWrap="wrap">
+              <Flex
+                maxHeight={['175px', '175px', '200px', '200px']}
+                flexDirection="column"
+                flexWrap="wrap"
+              >
                 {SEASONS.map((season, index) => (
-                  <Box width={1 / 3}>
+                  <Box width={[1 / 3, 1 / 3, 1 / 2, 1 / 2]}>
                     <CustomCheckbox
                       labelText={season}
                       onChange={updateFacet('season')}
@@ -232,9 +245,13 @@ const Home = ({ legends }) => {
               </Flex>
             </CustomCollapse>
             <CustomCollapse triggerText="Position">
-              <Flex maxHeight="200px" flexDirection="column" flexWrap="wrap">
+              <Flex
+                maxHeight={['175px', '175px', '300px', '300px']}
+                flexDirection="column"
+                flexWrap="wrap"
+              >
                 {POSITIONS.map((position, index) => (
-                  <Box width={1 / 3}>
+                  <Box width={[1 / 3, 1 / 3, 1 / 2, 1 / 2]}>
                     <CustomCheckbox
                       labelText={position}
                       onChange={updateFacet('position')}
