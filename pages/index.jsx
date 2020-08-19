@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import getAllLegends from '../database/getAllLegends';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SearchInput, { createFilter } from 'react-search-input';
 import { jsx } from 'theme-ui';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { Flex, Box, Image, Text, Heading, Button } from 'rebass';
 import LegendListEntry from '../components/LegendListEntry/LegendListEntry';
 import CustomCollapse from '../components/CustomCollapse/CustomCollapse';
@@ -95,11 +96,13 @@ const createFilterByFacets = (facets) => {
 const Home = ({ legends }) => {
   const parsedLegends = JSON.parse(legends);
 
+  const router = useRouter();
+
   const [searchTerm, setSearchTerm] = useState('');
   const [facets, setFacets] = useState({
     nation: [],
     position: [],
-    club: HUNNSNAL,
+    club: '',
     season: [],
   });
 
@@ -107,11 +110,43 @@ const Home = ({ legends }) => {
     setSearchTerm(term);
   };
 
-  const updateClub = (club) => () =>
-    setFacets({
-      ...facets,
-      club,
-    });
+  const updateClub = (club) => () => {
+    if (facets.club !== club) {
+      setFacets({
+        ...facets,
+        club,
+      });
+      if (club && club !== router.query.club) {
+        history.pushState(null, '', `/?club=${club}`);
+        router.push(
+          {
+            pathname: '/',
+            query: { club },
+          },
+          '',
+          { shallow: true },
+        );
+      }
+    }
+  };
+
+  useEffect(() => {
+    const { club } = router.query;
+    const queryClub = club ? (club !== HUNNSNAL ? BORUSSIA : HUNNSNAL) : '';
+    if (queryClub) {
+      updateClub(queryClub)();
+    } else if (!window.location.search) {
+      history.pushState(null, '', `/?club=${HUNNSNAL}`);
+      router.push(
+        {
+          pathname: '/',
+          query: { club: HUNNSNAL },
+        },
+        '',
+        { shallow: true },
+      );
+    }
+  }, [router.query.club]);
 
   const updateFacet = (facet) => ({ target: { id, checked } }) => {
     const facetIndex = facets[facet].indexOf(id);
@@ -186,6 +221,14 @@ const Home = ({ legends }) => {
             >
               Filters
             </Heading>
+            <Heading
+              m={[1, 2, 2, 2]}
+              as="h3"
+              fontSize={[1, 1, 1, 2]}
+              color="text"
+            >
+              Club
+            </Heading>
             <Flex
               justifyContent="space-around"
               flexDirection="row"
@@ -205,7 +248,7 @@ const Home = ({ legends }) => {
               </Button>
               <Button
                 onClick={updateClub(BORUSSIA)}
-                variant={facets.club !== HUNNSNAL ? 'active' : 'outline'}
+                variant={facets.club === BORUSSIA ? 'active' : 'outline'}
               >
                 <Image
                   sx={{
@@ -216,6 +259,14 @@ const Home = ({ legends }) => {
                 />
               </Button>
             </Flex>
+            <Heading
+              m={[1, 2, 2, 2]}
+              as="h3"
+              fontSize={[1, 1, 1, 2]}
+              color="text"
+            >
+              Player name
+            </Heading>
             <Box m={[1, 2, 2, 2]}>
               <SearchInput
                 className="search-input"
@@ -234,7 +285,10 @@ const Home = ({ legends }) => {
                 flexWrap="wrap"
               >
                 {SEASONS.map((season, index) => (
-                  <Box width={[1 / 3, 1 / 3, 1 / 2, 1 / 2]}>
+                  <Box
+                    key={`season-facet-${index}`}
+                    width={[1 / 3, 1 / 3, 1 / 2, 1 / 2]}
+                  >
                     <CustomCheckbox
                       labelText={season}
                       onChange={updateFacet('season')}
@@ -251,7 +305,10 @@ const Home = ({ legends }) => {
                 flexWrap="wrap"
               >
                 {POSITIONS.map((position, index) => (
-                  <Box width={[1 / 3, 1 / 3, 1 / 2, 1 / 2]}>
+                  <Box
+                    key={`position-facet-${index}`}
+                    width={[1 / 3, 1 / 3, 1 / 2, 1 / 2]}
+                  >
                     <CustomCheckbox
                       labelText={position}
                       onChange={updateFacet('position')}
@@ -265,6 +322,7 @@ const Home = ({ legends }) => {
               <Flex maxHeight="200px" overflowY="scroll" flexDirection="column">
                 {nations.map((nation, index) => (
                   <CustomCheckbox
+                    key={`nation-facet-${index}`}
                     labelText={nation}
                     onChange={updateFacet('nation')}
                     index={index}
