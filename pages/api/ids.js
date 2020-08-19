@@ -12,7 +12,6 @@ handler.get(async (req, res) => {
 
   const paths = ids.map((id) => ({ params: { id: id.toString() } }));
 
-  console.log(paths);
   res.send(paths);
 });
 
