@@ -1,4 +1,3 @@
-// example grid layout component
 import React from 'react';
 import { Box } from 'rebass';
 
@@ -13,8 +12,9 @@ export default (props) => (
         'repeat(4, 1fr)',
         'repeat(4, 1fr)',
       ],
+      gridTemplateRows: 'fit-content(40%)',
       alignItems: 'stretch',
-      gridGap: 3, // theme.space[3]
+      gridGap: 3,
     }}
   >
     {props.children}

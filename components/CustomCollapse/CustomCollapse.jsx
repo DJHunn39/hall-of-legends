@@ -25,6 +25,7 @@ const Trigger = ({ text, isOpen }) => (
 const CustomCollapse = ({ triggerText, children }) => (
   <Box m={[1, 2, 2, 2]} mr={[2, 2, 4, 4]}>
     <Collapsible
+      lazyRender={true}
       trigger={<Trigger text={triggerText} isOpen={false} />}
       triggerWhenOpen={<Trigger text={triggerText} isOpen={true} />}
     >

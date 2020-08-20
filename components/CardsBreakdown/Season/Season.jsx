@@ -135,7 +135,7 @@ const Season = ({
         </Box>
       </Box>
       {pac > 0 && (
-        <Flex flexDirection="row" flexWrap="wrap">
+        <Flex flexDirection="row" flexWrap="wrap" justifyContent="space-evenly">
           <Box p={[1, 1, 1, 3]}>
             <Stat isMini stat="Pace" value={pac} />
           </Box>

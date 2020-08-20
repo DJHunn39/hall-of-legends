@@ -28,6 +28,7 @@ const MyApp = ({ Component, pageProps }) => (
         margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
           Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        height: 100%;
       }
 
       .bg {
@@ -36,10 +37,6 @@ const MyApp = ({ Component, pageProps }) => (
 
       .overlay {
         background: rgba(44, 42, 42, 0.6);
-      }
-
-      * {
-        box-sizing: border-box;
       }
     `}</style>
   </ThemeProvider>

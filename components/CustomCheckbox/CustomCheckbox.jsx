@@ -2,9 +2,10 @@
 import { jsx } from 'theme-ui';
 import { Label, Checkbox } from '@rebass/forms';
 
-const CustomCheckbox = ({ labelText, onChange, index }) => (
+const CustomCheckbox = ({ labelText, onChange, index, checkboxProps }) => (
   <Label key={`${labelText}-check-${index}`} p={[1, 1, 2, 2]}>
     <Checkbox
+      {...checkboxProps}
       key={`position-${index}`}
       id={labelText}
       name={labelText}

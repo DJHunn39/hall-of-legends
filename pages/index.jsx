@@ -46,7 +46,19 @@ const SEASONS = [
 ];
 
 const checkSeason = ({ seasons }, season) =>
-  seasons.reduce((acc, curr) => (acc ? acc : season === curr.year), false);
+  seasons.reduce(
+    (acc, curr) =>
+      acc ? acc : season === curr.year || season.slice(2) === curr.year,
+    false,
+  );
+
+const getFacetTriggerString = (facetName, facets) => {
+  const facet = facetName.toLowerCase();
+
+  return `${facetName}${
+    facets[facet].length > 0 ? ' (' + facets[facet].join(', ') + ')' : ''
+  }`;
+};
 
 const createFilterByFacets = (facets) => {
   return (value) => {
@@ -179,11 +191,15 @@ const Home = ({ legends }) => {
     .sort();
 
   return (
-    <div className="container">
+    <>
       <Head>
         <title>Home - The Hall of Legends</title>
       </Head>
-      <main>
+      <main
+        sx={{
+          paddingBottom: '200px',
+        }}
+      >
         <Box flexGrow={2} px={3} pt={[1, 2, 3, 3]} pb={1} width={1}>
           <h1>
             <Image src="/HallOfLegendsLogoAlt.png" alt="The Hall of Legends" />
@@ -240,7 +256,7 @@ const Home = ({ legends }) => {
               >
                 <Image
                   sx={{
-                    maxHeight: ['30px', '30px', '30px', '50px'],
+                    height: ['30px', '30px', '30px', '50px'],
                   }}
                   src="/hunnsnalBadge.png"
                   alt="Hunnsnal"
@@ -252,7 +268,7 @@ const Home = ({ legends }) => {
               >
                 <Image
                   sx={{
-                    maxHeight: ['30px', '30px', '30px', '50px'],
+                    height: ['30px', '30px', '30px', '50px'],
                   }}
                   src="/borussiaBadge.png"
                   alt="Borussia MunchenFlapJack"
@@ -278,9 +294,11 @@ const Home = ({ legends }) => {
                 }}
               />
             </Box>
-            <CustomCollapse triggerText="Season">
+            <CustomCollapse
+              triggerText={getFacetTriggerString('Season', facets)}
+            >
               <Flex
-                maxHeight={['175px', '175px', '200px', '200px']}
+                height={['175px', '175px', '200px', '200px']}
                 flexDirection="column"
                 flexWrap="wrap"
               >
@@ -298,9 +316,11 @@ const Home = ({ legends }) => {
                 ))}
               </Flex>
             </CustomCollapse>
-            <CustomCollapse triggerText="Position">
+            <CustomCollapse
+              triggerText={getFacetTriggerString('Position', facets)}
+            >
               <Flex
-                maxHeight={['175px', '175px', '300px', '300px']}
+                height={['175px', '175px', '300px', '300px']}
                 flexDirection="column"
                 flexWrap="wrap"
               >
@@ -318,17 +338,29 @@ const Home = ({ legends }) => {
                 ))}
               </Flex>
             </CustomCollapse>
-            <CustomCollapse triggerText="Nation">
-              <Flex maxHeight="200px" overflowY="scroll" flexDirection="column">
-                {nations.map((nation, index) => (
-                  <CustomCheckbox
-                    key={`nation-facet-${index}`}
-                    labelText={nation}
-                    onChange={updateFacet('nation')}
-                    index={index}
-                  />
-                ))}
-              </Flex>
+            <CustomCollapse
+              triggerText={getFacetTriggerString('Nation', facets)}
+            >
+              <div
+                sx={{
+                  height: '200px',
+                  overflowY: 'scroll',
+                }}
+              >
+                <Flex flexDirection="column">
+                  {nations.map((nation, index) => (
+                    <CustomCheckbox
+                      checkboxProps={{
+                        checked: facets.nation.includes(nation),
+                      }}
+                      key={`nation-facet-${index}`}
+                      labelText={nation}
+                      onChange={updateFacet('nation')}
+                      index={index}
+                    />
+                  ))}
+                </Flex>
+              </div>
             </CustomCollapse>
           </Flex>
           <CardGrid width={[1, 1, 3 / 4, 4 / 5]}>
@@ -338,7 +370,7 @@ const Home = ({ legends }) => {
           </CardGrid>
         </Flex>
       </main>
-    </div>
+    </>
   );
 };
 
