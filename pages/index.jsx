@@ -208,13 +208,13 @@ const Home = ({ legends }) => {
         <Box m="auto" mb={3} width={[1, 1, 3 / 4, 3 / 4]}>
           <Text mb={3} fontSize={1}>
             The Hall of Legends is the hallowed home for all FIFA Ultimate Team
-            legends, old and new. To become a Legend, a player can do one or
-            many things. Score lots of goals. Turn up in the biggest of moments.
-            Attain a funny nickname. Each of these paths to legendary status as
-            as valid as any other, and all of the legends listed here have truly
-            earned their place. Feel free to browse the inventory of incredible
-            players, and enjoy some enthralling, entertaining, and thoroughly
-            pointless stories of football majesty.
+            legends, old and new. To become a Legend, a player can do one of
+            many things, or many of just one. Score lots of goals. Turn up in
+            the biggest of moments. Attain a funny nickname. Each of these paths
+            to legendary status is as valid as any other, and all of the legends
+            listed here have truly earned their place. Feel free to browse the
+            inventory of incredible players, and enjoy some enthralling,
+            entertaining, and thoroughly pointless stories of football majesty.
           </Text>
           <Text fontSize={1}>Welcome to The Hall of Legends.</Text>
         </Box>
@@ -341,26 +341,19 @@ const Home = ({ legends }) => {
             <CustomCollapse
               triggerText={getFacetTriggerString('Nation', facets)}
             >
-              <div
-                sx={{
-                  height: '200px',
-                  overflowY: 'scroll',
-                }}
-              >
-                <Flex flexDirection="column">
-                  {nations.map((nation, index) => (
-                    <CustomCheckbox
-                      checkboxProps={{
-                        checked: facets.nation.includes(nation),
-                      }}
-                      key={`nation-facet-${index}`}
-                      labelText={nation}
-                      onChange={updateFacet('nation')}
-                      index={index}
-                    />
-                  ))}
-                </Flex>
-              </div>
+              <Flex height="200px" overflowY="scroll" flexDirection="column">
+                {nations.map((nation, index) => (
+                  <CustomCheckbox
+                    checkboxProps={{
+                      checked: facets.nation.includes(nation),
+                    }}
+                    key={`nation-facet-${index}`}
+                    labelText={nation}
+                    onChange={updateFacet('nation')}
+                    index={index}
+                  />
+                ))}
+              </Flex>
             </CustomCollapse>
           </Flex>
           <CardGrid width={[1, 1, 3 / 4, 4 / 5]}>
