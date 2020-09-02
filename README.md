@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 The project is for a simple webapp used for displaying information and statistics about FIFA Ultimate Team players for me and my flatmate's clubs from almost a decade of play.
 
+Just fyi if you're looking at this from a professional perspective - I absolutely do not recommend looking at this from a professional perspective! It's totally hacky, makes very few considerations for performance, and a lot of duplicate code is everywhere. And there are no tests. Or linting rules. Or any consistency in general.
+
 ## Getting Started
 
 First, run the development server:
