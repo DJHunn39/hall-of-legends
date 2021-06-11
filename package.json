@@ -11,7 +11,7 @@
     "@rebass/forms": "^4.0.6",
     "@rebass/preset": "^4.0.5",
     "@theme-ui/presets": "^0.3.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "mongoose": "^5.9.20",
     "next": "9.4.4",
     "next-connect": "^0.7.2",
