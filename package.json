@@ -13,7 +13,7 @@
     "@theme-ui/presets": "^0.3.0",
     "axios": "^0.21.1",
     "mongoose": "^5.9.20",
-    "next": "9.4.4",
+    "next": "11.1.0",
     "next-connect": "^0.7.2",
     "react": "16.13.1",
     "react-collapsible": "^2.8.0",
